@@ -30,6 +30,8 @@ private:
 
 	bool GetSightRayHigLocation(OUT FVector& OutHitLocation) const;
 
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& out_LookDirection) const;
+
 	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5f;
 

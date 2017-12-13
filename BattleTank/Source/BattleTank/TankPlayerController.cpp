@@ -55,21 +55,45 @@ void ATankPlayerController::AimTowardsCrosshair()
 bool ATankPlayerController::GetSightRayHigLocation(OUT FVector& OutHitLocation) const
 {
 
-	// find the crosshair position
+	// find the crosshair position in pixel coordinates
+
+
 
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 
 	FVector2D ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
-	
+	FVector LookDirection;
 
 	// deproject screen position of the crosshair to a world direction
-	// Line-trace along that look direction and see what we hit (up to max range)
 
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *LookDirection.ToString());
+	}
+	
 
+	// Line-trace along that LookDirection and see what we hit (up to max range)
+
+	FHitResult HitResult;
+
+	FCollisionObjectQueryParams LandscapeCollisionParam = FCollisionObjectQueryParams(ECC_WorldStatic);
+
+	GetWorld()->LineTraceSingleByObjectType(HitResult, GetWorld()->GetFirstPlayerController()->GetActorTransform().GetLocation(), LookDirection * 100000, LandscapeCollisionParam);
+
+	UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *HitResult.ToString());
 
 
 	OutHitLocation = FVector(1.0f, 1.0f, 1.0f);
 
 	return false;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & out_LookDirection) const
+{
+	FVector CameraWorldLocation;
+
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, out_LookDirection);
+
+	
 }
