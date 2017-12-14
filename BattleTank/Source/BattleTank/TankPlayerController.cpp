@@ -46,7 +46,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHigLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString());
+		GetControlledTank()->AimAt(HitLocation);
 	}
 
 
@@ -76,7 +76,8 @@ bool ATankPlayerController::GetSightRayHigLocation(OUT FVector& OutHitLocation) 
 		if (GetLookVectorHitLocation(OutHitLocation, LookDirection))
 
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *OutHitLocation.ToString());
+			//UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *OutHitLocation.ToString());
+			return true;
 		}
 
 	}

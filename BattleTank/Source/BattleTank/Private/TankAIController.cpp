@@ -9,6 +9,7 @@ void ATankAIController::BeginPlay()
 
 	AITank = GetAITankController();
 
+	///Log out potential lack of AI Tank Controllers (set in blueprint that all instances of TANK_BP are automatically possesed by AI)
 	if (!AITank)
 	{
 		UE_LOG(LogTemp, Error, TEXT("AI Controller not attached (possessing) to %s"), *GetPawn()->GetName())
@@ -21,6 +22,7 @@ void ATankAIController::BeginPlay()
 
 	auto PlayerPawn = GetPlayerTank();
 
+	///Log out potential lack of PlayerPawn Tank Controller
 	if (!PlayerPawn)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Player Tank not found! nullptr at %s"), *AITank->GetName())
@@ -31,6 +33,16 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+//called every frame
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (GetPlayerTank())
+	{
+		GetAITankController()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
 
 ATank* ATankAIController::GetAITankController() const
 {
@@ -43,6 +55,5 @@ ATank* ATankAIController::GetPlayerTank() const
 
 	return Cast<ATank>(PlayerPawn);
 	 
-	
 }
 
