@@ -35,9 +35,12 @@ ATank* ATankPlayerController::GetControlledTank() const
 	return Cast<ATank>(GetPawn());
 }
 
+
+
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
+
 
 	FVector HitLocation; // Out parameter
 
@@ -54,10 +57,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 bool ATankPlayerController::GetSightRayHigLocation(OUT FVector& OutHitLocation) const
 {
-
 	// find the crosshair position in pixel coordinates
-
-
 
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
@@ -68,23 +68,19 @@ bool ATankPlayerController::GetSightRayHigLocation(OUT FVector& OutHitLocation) 
 	// deproject screen position of the crosshair to a world direction
 
 	if (GetLookDirection(ScreenLocation, LookDirection))
+
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *LookDirection.ToString());
+		// Line-trace along that LookDirection and see what we hit (up to max range)
+
+
+		if (GetLookVectorHitLocation(OutHitLocation, LookDirection))
+
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *OutHitLocation.ToString());
+		}
+
 	}
-	
 
-	// Line-trace along that LookDirection and see what we hit (up to max range)
-
-	FHitResult HitResult;
-
-	FCollisionObjectQueryParams LandscapeCollisionParam = FCollisionObjectQueryParams(ECC_WorldStatic);
-
-	GetWorld()->LineTraceSingleByObjectType(HitResult, GetWorld()->GetFirstPlayerController()->GetActorTransform().GetLocation(), LookDirection * 100000, LandscapeCollisionParam);
-
-	UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *HitResult.ToString());
-
-
-	OutHitLocation = FVector(1.0f, 1.0f, 1.0f);
 
 	return false;
 }
@@ -96,4 +92,19 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, out_LookDirection);
 
 	
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector& out_HitLocation, FVector LookDirection) const
+{
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+
+	FHitResult HitResult;
+
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, StartLocation + (LookDirection*LineTraceRange), ECC_Visibility))
+	{
+		out_HitLocation = HitResult.Location;
+		return true;
+	}
+
+	return false;
 }
