@@ -40,8 +40,14 @@ void ATankAIController::Tick(float DeltaTime)
 
 	if (GetPlayerTank())
 	{
-		GetAITankController()->AimAt(GetPlayerTank()->GetActorLocation());
+		//TODO move towards the player 
+
+		//Aim towards the player
+		GetAITankController()->AimAt(GetPlayerTank()->GetActorLocation(), AITank->LaunchSpeed);
+
+		//fire if ready
 	}
+
 }
 
 ATank* ATankAIController::GetAITankController() const
@@ -52,6 +58,8 @@ ATank* ATankAIController::GetAITankController() const
 ATank* ATankAIController::GetPlayerTank() const
 {
 	APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+
+	
 
 	return Cast<ATank>(PlayerPawn);
 	 

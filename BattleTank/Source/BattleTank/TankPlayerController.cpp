@@ -46,13 +46,14 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHigLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation);
-	}
+		GetControlledTank()->AimAt(HitLocation, GetControlledTank()->LaunchSpeed);
 
 
 		//RayCast through the aiming reticule
 		// if hit landscape return true and modify vector
 		// if not hit handscape, return false and keep vector
+		
+	}
 }
 
 bool ATankPlayerController::GetSightRayHigLocation(OUT FVector& OutHitLocation) const
@@ -88,7 +89,7 @@ bool ATankPlayerController::GetSightRayHigLocation(OUT FVector& OutHitLocation) 
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & out_LookDirection) const
 {
-	FVector CameraWorldLocation;
+	FVector CameraWorldLocation; // discarding this
 
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, out_LookDirection);
 
