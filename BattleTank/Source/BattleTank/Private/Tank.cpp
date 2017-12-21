@@ -1,7 +1,8 @@
 // Copyright Rafal Boguszewski 2017
 
 #include "Public/Tank.h"
-
+#include "../Public/TankAimingComponent.h"
+#include "../Public/TankBarrel.h"
 
 // Sets default values
 ATank::ATank()

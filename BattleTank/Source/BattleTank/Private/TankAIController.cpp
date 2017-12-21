@@ -1,6 +1,7 @@
 // Copyright Rafal Boguszewski 2017
 
 #include "Public/TankAIController.h"
+#include "Public/Tank.h"
 
 
 void ATankAIController::BeginPlay()
