@@ -33,7 +33,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s with speed of %f"), *GetOwner()->GetName(), *AimDirection.ToString(), *BarrelLocation.ToString(), LaunchSpeed);
+		//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s with speed of %f"), *GetOwner()->GetName(), *AimDirection.ToString(), *BarrelLocation.ToString(), LaunchSpeed);
 
 		MoveBarrelTowards(AimDirection);
 	}
@@ -43,6 +43,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	//Get the AimDirection vector and set the rotation of the barrel basedd on that vecotr. Work out the difference between current barrel rotation, and AimDirection
+	
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+
 	// Move the barrel the right amount this frame
 	//Given a max elevation speed and the frame time
 }
