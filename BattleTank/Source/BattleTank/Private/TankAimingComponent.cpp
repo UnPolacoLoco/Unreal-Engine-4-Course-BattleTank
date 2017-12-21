@@ -44,6 +44,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s with speed of %f"), *GetOwner()->GetName(), *AimDirection.ToString(), *BarrelLocation.ToString(), LaunchSpeed);
 
 		MoveBarrelTowards(AimDirection);
+		RotateTurretTowards(AimDirection);
 	}
 	else
 	{
@@ -64,12 +65,16 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *AimAsRotator.ToString());
 
-	
-
 	Barrel->ElevateBarrel(DeltaRotator.Pitch);
 }
 
 void UTankAimingComponent::RotateTurretTowards(FVector AimDirection)
 {
+	auto TurretRotator = Turret->GetForwardVector().Rotation().Yaw;
+	auto AimAsRotator = AimDirection.Rotation().Yaw;
+
+	auto DeltaRotator = AimAsRotator - TurretRotator;
+
+	Turret->RotateTurret(1); //TODO get rid of magic number
 
 }
