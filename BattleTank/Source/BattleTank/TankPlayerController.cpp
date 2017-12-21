@@ -11,7 +11,7 @@ void ATankPlayerController::BeginPlay()
 
 	if (!ControlledTank)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player controlle - no Controller Tank!"));
+		UE_LOG(LogTemp, Warning, TEXT("Player controller - no Controller Tank!"));
 	}
 	else
 	{
