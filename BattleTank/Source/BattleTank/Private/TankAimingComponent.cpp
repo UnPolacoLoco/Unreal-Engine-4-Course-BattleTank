@@ -75,6 +75,6 @@ void UTankAimingComponent::RotateTurretTowards(FVector AimDirection)
 
 	auto DeltaRotator = AimAsRotator - TurretRotator;
 
-	Turret->RotateTurret(1); //TODO get rid of magic number
+	Turret->RotateTurret(DeltaRotator); //TODO get rid of magic number
 
 }
