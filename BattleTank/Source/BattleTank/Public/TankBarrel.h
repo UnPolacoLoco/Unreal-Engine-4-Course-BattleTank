@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
-#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "TankBarrel.generated.h"
 
 /**
@@ -22,7 +21,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 5; //Sensible default
+		float MaxDegreesPerSecond = 10; //Sensible default
 	
 	UPROPERTY(EditAnywhere, Category = Setup)
 		float MaxElevation = 40.f;
