@@ -67,5 +67,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	Barrel->ElevateBarrel(DeltaRotator.Pitch);
 	Turret->RotateTurret(DeltaRotator.Yaw);
+	
 }
 
