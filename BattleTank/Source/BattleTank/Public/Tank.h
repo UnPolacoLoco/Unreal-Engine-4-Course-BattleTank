@@ -44,7 +44,7 @@ public:
 	void ATank::AimAt(FVector HitLocation, float LaunchSpeed);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 100000.f; // TODO find sensible starting value
+		float LaunchSpeed = 6000.f; 
 
 	
 	
