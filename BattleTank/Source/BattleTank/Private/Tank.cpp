@@ -6,6 +6,8 @@
 #include "../Public/TankTurret.h"
 #include "../Public/Projectile.h"
 
+
+
 // Sets default values
 ATank::ATank()
 {
@@ -60,13 +62,14 @@ void ATank::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void ATank::Fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: FIRING!"), Time);
+	
 
 	if (!Barrel) { return; }
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
 
+	Projectile->LaunchProjectile(LaunchSpeed);
+	
 	//Spawn projectile at socket location
 
 
