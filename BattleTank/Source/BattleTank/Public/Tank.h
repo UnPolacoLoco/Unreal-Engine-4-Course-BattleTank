@@ -47,17 +47,21 @@ public:
 
 	void ATank::AimAt(FVector HitLocation, float LaunchSpeed);
 
-	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 6000.f; 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float LaunchSpeed = 6000.f;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float ReloadTimeInSeconds = 3.f;
+
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 private:
 
 	//local barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
-	float ReloadTimeInSeconds = 3.f;
+	
 	double LastFireTime = 0;
 
 	

@@ -35,13 +35,13 @@ private:
 
 	bool GetLookVectorHitLocation(FVector& out_HitLocation, FVector LookDirection) const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLocation = 0.5f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairYLocation = 0.3;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	int LineTraceRange = 1000000;
 
 	

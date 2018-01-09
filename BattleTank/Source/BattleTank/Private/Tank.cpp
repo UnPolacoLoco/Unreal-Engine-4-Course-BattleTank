@@ -63,9 +63,7 @@ void ATank::AimAt(FVector HitLocation, float LaunchSpeed)
 void ATank::Fire()
 {
 
-
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-
 
 	//Spawns a projectile at socket location
 
