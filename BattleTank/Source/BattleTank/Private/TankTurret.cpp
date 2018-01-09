@@ -6,7 +6,7 @@
 
 void UTankTurret::RotateTurret(float RelativeSpeed)
 {
-	auto time = GetWorld()->GetTimeSeconds();
+	///auto time = GetWorld()->GetTimeSeconds();
 	///UE_LOG(LogTemp, Warning, TEXT("turret rotating: %f"), time);
 
 	//move the turret the right amount this frame 
