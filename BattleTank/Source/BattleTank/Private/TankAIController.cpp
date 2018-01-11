@@ -45,7 +45,10 @@ void ATankAIController::Tick(float DeltaTime)
 
 	if (PlayerTank)
 	{
-		//TODO move towards the player 
+		//move towards the player 
+
+		MoveToActor(PlayerTank, AcceptanceRadius, true, true, false, 0, true);
+		
 
 		//Aim towards the player
 		AIControlledTank->AimAt(PlayerTank->GetActorLocation(), AIControlledTank->LaunchSpeed);
@@ -53,6 +56,8 @@ void ATankAIController::Tick(float DeltaTime)
 		//TODO fire if ready
 		AIControlledTank->Fire(); 
 	}
+
+	
 
 }
 
