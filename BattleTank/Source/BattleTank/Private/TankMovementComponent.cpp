@@ -6,7 +6,6 @@
 
 void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-
 	if (!LeftTrackToSet || !RightTrackToSet) { return; }
 
 	LeftTankTrack = LeftTrackToSet;
@@ -15,7 +14,6 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-
 	if (!LeftTankTrack || !RightTankTrack) { return; }
 	LeftTankTrack->SetThrottle(Throw);
 	RightTankTrack->SetThrottle(Throw);
@@ -42,7 +40,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	IntendMoveForward(ForwardThrow);
 	IntendTurnRight(RightThrow);
 
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to: %s"), *TankName, *AIForwardIntention.ToString())
+	UE_LOG(LogTemp, Warning, TEXT("Right: %f Forward: %f"), RightThrow, ForwardThrow)
 }
 
 

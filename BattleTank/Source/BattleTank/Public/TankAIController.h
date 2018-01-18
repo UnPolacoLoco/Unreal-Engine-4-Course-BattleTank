@@ -30,7 +30,7 @@ public:
 private:
 
 	//hopw close can the AI tank get
-	float AcceptanceRadius = 20.f;
+	float AcceptanceRadius = 5000.f;
 
 	
 
