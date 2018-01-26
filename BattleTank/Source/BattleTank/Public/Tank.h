@@ -23,11 +23,6 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
@@ -65,10 +60,8 @@ public:
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 private:
-
-	//local barrel reference for spawning projectile
-	UTankBarrel* Barrel = nullptr;
 	
+	UTankBarrel *Barrel = nullptr; //TODO remove
 	double LastFireTime = 0;
 
 	
