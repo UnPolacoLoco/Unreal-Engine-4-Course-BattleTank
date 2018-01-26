@@ -10,6 +10,16 @@
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "TankAimingComponent.generated.h"
 
+
+//ENUM for aiming state
+UENUM()
+enum class EAimingState :uint8
+{
+	RELOADING,
+	AIMING,
+	LOCKED
+};
+
 //Forward Declaration
 class UTankBarrel;
 class UTankTurret;
@@ -25,10 +35,11 @@ public:
 	UTankAimingComponent();
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 	void SetTurretReference(UTankTurret* TurretToSet);
-
-public:	
-
 	void AimAt(FVector HitLocation, float LaunchSpeed);
+
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+		EAimingState AimingState = EAimingState::AIMING;
 
 		
 private:
@@ -36,5 +47,6 @@ private:
 	UTankTurret* Turret = nullptr;
 	void MoveBarrelTowards(FVector AimDirection);
 
+	
 	
 };
