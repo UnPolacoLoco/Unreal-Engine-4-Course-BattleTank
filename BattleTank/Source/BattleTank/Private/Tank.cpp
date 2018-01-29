@@ -1,7 +1,6 @@
 // Copyright Rafal Boguszewski 2017
 
 #include "../Public/Tank.h"
-#include "../Public/TankAimingComponent.h"
 #include "../Public/TankBarrel.h"
 #include "../Public/TankTurret.h"
 #include "../Public/Projectile.h"
@@ -16,7 +15,7 @@ ATank::ATank()
 
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 	//TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
-
+	
 }
 
 
@@ -26,7 +25,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); //Needed for BP Begin Play to run!
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+
 }
 
 // Called every frame
@@ -42,12 +41,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ATank::AimAt(FVector HitLocation, float LaunchSpeed)
-{
-	if (!ensure(TankAimingComponent)) { return; }
 
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
 
 
 void ATank::Fire()

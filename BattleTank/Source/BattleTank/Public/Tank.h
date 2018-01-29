@@ -9,7 +9,6 @@
 
 //forward declarations
 class UTankBarrel;
-class UTankAimingComponent;
 class UTankTurret;
 class AProjectile;
 
@@ -24,28 +23,23 @@ public:
 
 
 	UFUNCTION(BlueprintCallable)
-	void Fire();
+		void Fire();
 
-	
-	
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 
-public:	
-	
+public:
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void ATank::AimAt(FVector HitLocation, float LaunchSpeed);
 
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-		float LaunchSpeed = 6000.f;
+	//UPROPERTY(EditDefaultsOnly, Category = Firing)
+	//	float LaunchSpeed = 6000.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float ReloadTimeInSeconds = 3.f;
@@ -55,13 +49,10 @@ public:
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 private:
-	
+
 	UTankBarrel *Barrel = nullptr; //TODO remove
 	double LastFireTime = 0;
 
-	
+	float LaunchSpeed = 0;
 
-
-	
-	
 };

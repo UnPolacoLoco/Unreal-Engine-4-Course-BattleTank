@@ -9,7 +9,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
 	if (AimingComponent)
 	{
@@ -32,24 +32,21 @@ void ATankPlayerController::Tick(float DeltaTime)
 }
 
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-
-	return Cast<ATank>(GetPawn());
-}
 
 
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetControlledTank())) { return; }
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
 
 	FVector HitLocation; // Out parameter
+	
 
 	if (GetSightRayHigLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation, GetControlledTank()->LaunchSpeed);
+		AimingComponent->AimAt(HitLocation);
 
 		//RayCast through the aiming reticule
 		// if hit landscape return true and modify vector
