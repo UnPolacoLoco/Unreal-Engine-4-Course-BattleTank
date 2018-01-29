@@ -18,7 +18,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	LeftTankTrack->SetThrottle(Throw);
 	RightTankTrack->SetThrottle(Throw);
 
-	//TODO prevent doubling
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
