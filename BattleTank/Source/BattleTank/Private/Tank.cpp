@@ -14,10 +14,6 @@ ATank::ATank()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	//UE_LOG(LogTemp, Warning, TEXT("DONKEY: ATank constructor called in C++ for %s"), *GetName());
-
-
-	// no need to protect pointers as added at construction
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 	//TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 
@@ -30,7 +26,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); //Needed for BP Begin Play to run!
-	
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Called every frame
@@ -61,7 +57,9 @@ void ATank::Fire()
 
 	//Spawns a projectile at socket location
 
-	if (Barrel && isReloaded)
+	if (!ensure(Barrel)) { return; } //TODO Fix
+
+	if (isReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
 		Projectile->LaunchProjectile(LaunchSpeed);
