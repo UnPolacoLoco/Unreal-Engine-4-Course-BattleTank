@@ -15,6 +15,8 @@ ATank::ATank()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	UE_LOG(LogTemp, Warning, TEXT("DONKEY: ATank constructor called in C++ for %s"), *GetName());
+
 
 	// no need to protect pointers as added at construction
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
@@ -28,8 +30,7 @@ ATank::ATank()
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay(); //Needed for BP Begin Play to run!
 }
 
 // Called every frame

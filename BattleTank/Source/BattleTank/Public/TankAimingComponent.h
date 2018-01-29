@@ -41,7 +41,7 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-		EAimingState AimingState = EAimingState::AIMING;
+		EAimingState AimingState = EAimingState::RELOADING;
 
 		
 private:
