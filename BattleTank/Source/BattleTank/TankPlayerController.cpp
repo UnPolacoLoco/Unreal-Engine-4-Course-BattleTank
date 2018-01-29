@@ -42,7 +42,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank()) { return; }
+	if (!ensure(GetControlledTank())) { return; }
 
 
 	FVector HitLocation; // Out parameter
@@ -51,11 +51,9 @@ void ATankPlayerController::AimTowardsCrosshair()
 	{
 		GetControlledTank()->AimAt(HitLocation, GetControlledTank()->LaunchSpeed);
 
-
 		//RayCast through the aiming reticule
 		// if hit landscape return true and modify vector
 		// if not hit handscape, return false and keep vector
-		
 	}
 }
 
