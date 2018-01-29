@@ -48,13 +48,9 @@ public:
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 
-
-
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EAimingState AimingState = EAimingState::RELOADING;
-
-
 
 		
 private:
