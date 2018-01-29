@@ -33,10 +33,4 @@ private:
 	float AcceptanceRadius = 5000.f;
 
 	
-
-
-
-
-	
-	
 };
